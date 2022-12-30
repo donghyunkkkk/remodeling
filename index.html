@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=1280, initial-scale=1.0, user-scalable=0">
+	<title>리모델링 홈페이지 구성</title>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="js/script.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">	
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+	
+	<!-- 상단 -->
+	<div class="header">
+		<div>
+		<h1><a href="index.html"><img src="images/logo.png" alt="로고"></a></h1>
+		</div>
+		<div id="ha"><button type="button" id="ham">&#x2630;</button></div>
+		<div class="menu">
+			<nav>
+				<a href="index.html">HOME</a>
+				<a href="#section2">SERVICES</a>
+				<a href="#section3">GALLERY</a>
+				<a href="interior.html">INTERIOR</a>
+				<button type="button"><a href="javascript:alert('준비중입니다.');" onfocus="this.blur()">CALL NOW</a></button>
+			<nav>
+		</div>
+	</div>
+	
+	<!-- 메인 -->
+	<!-- 첫페이지 -->
+	<div id="section1" class="section">
+		<h2>Initial Design Remodeling</h2>
+		<p>recreating dream homes</p>
+	</div>
+	
+	
+	<!-- 두번째 페이지 -->
+	<div id="section2" class="section">
+		<h2>스마트한 리모델링</h2>
+		<p>전문가에 맡겨보세요!</p>
+		<div class="button">
+			<button type="button" id="leftB" class="op"><img src="images/prev.png" alt="prev"></button>
+			<button type="button" id="rightB"><img src="images/next.png" alt="next"></button>
+		</div>	
+		<div class="bloc">
+			<div class="quick_first">
+				<div class="svg_img">
+					<img src="images/svg_ani.png" alt="스마트한 이미지">
+						<div id="svg_ani1"></div>
+						<div id="svg_ani2"></div>
+						<div id="svg_ani3"></div>
+		
+				</div>
+			</div>
+			<div class="box">
+				<div class="quick white" id="box1">
+					<h2>Check</h2>
+					<p>
+					전문가가 직접 
+					<br>전문장비를 
+					활용하여 설계방법을 
+					<br>설명해드립니다!
+					</p>
+				</div>
+				<div class="quick" id="box2">
+					<h2>Solution</h2>
+					<p>
+					설계도중이나 시공 후	<br>문제점 발견시 해결책을 제시해주며 보다 나은 주택 기능/환경 개선에 도움을 드립니다!
+					</p>
+				</div>
+				<div class="quick" id="box3">
+					<h2>Remodeling</h2>
+					<p>
+					깔끔한 완성도와 <br>최신 디자인 트렌드를 적용한 고객님의 만족도 100% 달성까지 리모델링 서비스를 제공합니다!
+					</p>
+				</div>
+				<div class="quick" id="box4">
+					<h2>After Services</h2>
+					<p>
+					사후에 문제점 발생에 <br>삼당 신청시 100% 무료로<br> 진행해드립니다!
+					</p>
+				</div>
+				<div class="quick" id="box5">
+					<h2>Reliability</h2>
+					<p>
+					나의 집을 꾸미는 것처럼<br> 고객님의 편안한 인테리어에<br> 최선을 다할 것을 <br>약속드립니다!
+					</p>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<!-- 세번째 페이지 -->
+	
+	<div id="section3" class="section">
+		<img id="sec3bg" src="images/bg1.jpg" alt="배경이미지 3">
+		<div class="vloc">
+			<div class="vlock">
+				<div class="v1">
+					<h2>스타일 갤러리</h2>
+					<p>취향에 맞는 스타일을 찾아보세요</p>
+				</div>
+				<div class="v2">
+					<button type="button" id="smallleft" class="op"><img src="images/prev.png" alt="prev"></button>
+						<p>심플 베이직</p>
+					<button type="button" id="smallright"><img src="images/next.png" alt="next"></button>
+				</div>
+				<div class="v3">
+					<img src="images/bg1.jpg" alt="우드 베이직">
+				</div>
+				<div class="v4">
+					<h3><a href="#">자세히 보기</a></h3>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+	<footer>
+	</footer>
+	<a href="#section1" id="topIcon" class="material-icons">expand_less</a>
+	
+	
+	
+	<script>
+    window.onload = function(){
+      const elm = document.querySelectorAll('.section');
+      const elmCount = elm.length;
+      elm.forEach(function(item, index){
+        item.addEventListener('mousewheel', function(event){
+          event.preventDefault();
+          let delta = 0;
+
+          if (!event) event = window.event;
+          if (event.wheelDelta) {
+              delta = event.wheelDelta / 120;
+              if (window.opera) delta = -delta;
+          } 
+          else if (event.detail)
+              delta = -event.detail / 3;
+
+          let moveTop = window.scrollY;
+          let elmSelector = elm[index];
+
+          // wheel down : move to next section
+          if (delta < 0){
+            if (elmSelector !== elmCount-1){
+              try{
+                moveTop = window.pageYOffset + elmSelector.nextElementSibling.getBoundingClientRect().top;
+              }catch(e){}
+            }
+          }
+          
+          // wheel up : move to previous section
+          else{
+            if (elmSelector !== 0){
+              try{
+                moveTop = window.pageYOffset + elmSelector.previousElementSibling.getBoundingClientRect().top;
+              }catch(e){}
+            }
+          }
+
+          const body = document.querySelector('html');
+          window.scrollTo({top:moveTop, left:0, behavior:'smooth'});
+        });
+      });
+    }
+  </script>
+</body>
+</html>
